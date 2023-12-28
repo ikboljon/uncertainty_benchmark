@@ -14,9 +14,14 @@ import torchvision.transforms as transforms
 from acsconv.converters import ACSConverter, Conv2_5dConverter, Conv3dConverter
 from medmnist import INFO, Evaluator
 from models import ResNet18, ResNet50
+from models_mcd import ResNet18_MCD, ResNet50_MCD
 from tensorboardX import SummaryWriter
 from tqdm import trange
 from utils.utils import Transform3D, model_to_syncbn
+
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+
 
 
 def main(data_flag, output_root, num_epochs, gpu_ids, batch_size, conv, pretrained_3d, download, model_flag, as_rgb, shape_transform, model_path, run):
@@ -78,6 +83,10 @@ def main(data_flag, output_root, num_epochs, gpu_ids, batch_size, conv, pretrain
         model = ResNet18(in_channels=n_channels, num_classes=n_classes)
     elif model_flag == 'resnet50':
         model = ResNet50(in_channels=n_channels, num_classes=n_classes)
+    elif model_flag == 'resnet18_mcd':
+        model = ResNet18_MCD(in_channels=n_channels, num_classes=n_classes)
+    elif model_flag == 'resnet50_mcd':
+        model = ResNet50_MCD(in_channels=n_channels, num_classes=n_classes)
     else:
         raise NotImplementedError
 
@@ -278,7 +287,7 @@ if __name__ == '__main__':
                         type=str)
     parser.add_argument('--model_flag',
                         default='resnet18',
-                        help='choose backbone, resnet18/resnet50',
+                        help='choose backbone, resnet18/resnet50/resnet18_mcd/resnet50_mcd',
                         type=str)
     parser.add_argument('--run',
                         default='model1',
