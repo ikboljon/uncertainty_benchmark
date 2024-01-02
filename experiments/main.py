@@ -13,8 +13,8 @@ import torch.utils.data as data
 import torchvision.transforms as transforms
 from acsconv.converters import ACSConverter, Conv2_5dConverter, Conv3dConverter
 from medmnist import INFO, Evaluator
-from models import ResNet18, ResNet50
-from models_mcd import ResNet18_MCD, ResNet50_MCD
+from models.models import ResNet18, ResNet50
+from models.models_mcd import ResNet18_MCD, ResNet50_MCD
 from tensorboardX import SummaryWriter
 from tqdm import trange
 from utils.utils import Transform3D, model_to_syncbn

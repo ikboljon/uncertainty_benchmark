@@ -20,7 +20,7 @@ from torchmetrics import (
     Precision,
     Recall,
     AUROC,
-    AUC,
+    # AUC,
     AveragePrecision,
     CalibrationError,
 )
